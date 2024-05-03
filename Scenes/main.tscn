@@ -1,6 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtvujn6d0nitu"]
+[gd_scene load_steps=11 format=3 uid="uid://dtvujn6d0nitu"]
 
 [ext_resource type="FontFile" uid="uid://fevuyqn1qtdg" path="res://Assets/Fonts/Xolonium-Regular.ttf" id="1_46s3j"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_hrfqg"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="2_2c0fy"]
+[ext_resource type="Script" path="res://Scripts/Ball.gd" id="3_2obyx"]
+[ext_resource type="Script" path="res://Scripts/CPU.gd" id="3_kpkc0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d442q"]
 size = Vector2(20, 119)
@@ -18,6 +22,7 @@ size = Vector2(1152, 64)
 size = Vector2(64, 648)
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_hrfqg")
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -40,6 +45,7 @@ grow_vertical = 2
 
 [node name="Player" type="StaticBody2D" parent="."]
 position = Vector2(50, 324)
+script = ExtResource("2_2c0fy")
 
 [node name="ColorRect" type="ColorRect" parent="Player"]
 anchors_preset = 4
@@ -56,6 +62,7 @@ shape = SubResource("RectangleShape2D_d442q")
 
 [node name="CPU" type="StaticBody2D" parent="."]
 position = Vector2(1082, 324)
+script = ExtResource("3_kpkc0")
 
 [node name="ColorRect" type="ColorRect" parent="CPU"]
 anchors_preset = 4
@@ -73,6 +80,7 @@ shape = SubResource("RectangleShape2D_d442q")
 [node name="Ball" type="CharacterBody2D" parent="."]
 position = Vector2(576, 324)
 collision_mask = 3
+script = ExtResource("3_2obyx")
 
 [node name="ColorRect" type="ColorRect" parent="Ball"]
 anchors_preset = 8
@@ -138,3 +146,5 @@ vertical_alignment = 1
 [node name="BallTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
